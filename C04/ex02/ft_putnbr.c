@@ -6,38 +6,32 @@
 /*   By: jramalho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:56:22 by jramalho          #+#    #+#             */
-/*   Updated: 2024/02/26 18:50:42 by jramalho         ###   ########.fr       */
+/*   Updated: 2024/02/29 13:13:14 by jramalho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
 
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
 void	ft_putnbr(int nb)
 {
+	char	digit;
+
 	if (nb == -2147483648)
 	{
-		ft_putchar('-');
-		ft_putchar('2');
-		ft_putnbr(147483648);
-	}
-	else if (nb < 0)
-	{
-		ft_putchar('-');
-		nb = -nb;
-		ft_putnbr(nb);
-	}
-	 else if (nb > 9)
-	{
-		ft_putnbr(nb / 10);
-		ft_putnbr(nb % 10);
+		write(1, "-2147483648", 11);
 	}
 	else
 	{
-		ft_putchar(nb + 48);
+		if (nb < 0)
+		{
+			write(1, "-", 1);
+			nb = -nb;
+		}
+		if (nb > 9)
+		{
+			ft_putnbr(nb / 10);
+		}
+		digit = nb % 10 + '0';
+		write(1, &digit, 1);
 	}
 }
 /*
